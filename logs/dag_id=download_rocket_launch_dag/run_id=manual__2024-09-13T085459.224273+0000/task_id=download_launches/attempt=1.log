@@ -1,0 +1,103 @@
+[2024-09-13T08:55:02.069+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-09-13T08:55:02.078+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: download_rocket_launch_dag.download_launches manual__2024-09-13T08:54:59.224273+00:00 [queued]>
+[2024-09-13T08:55:02.083+0000] {taskinstance.py:2612} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: download_rocket_launch_dag.download_launches manual__2024-09-13T08:54:59.224273+00:00 [queued]>
+[2024-09-13T08:55:02.083+0000] {taskinstance.py:2865} INFO - Starting attempt 1 of 1
+[2024-09-13T08:55:02.092+0000] {taskinstance.py:2888} INFO - Executing <Task(BashOperator): download_launches> on 2024-09-13 08:54:59.224273+00:00
+[2024-09-13T08:55:02.097+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=85) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-09-13T08:55:02.098+0000] {standard_task_runner.py:72} INFO - Started process 87 to run task
+[2024-09-13T08:55:02.098+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'download_rocket_launch_dag', 'download_launches', 'manual__2024-09-13T08:54:59.224273+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/download_rocket_launch.py', '--cfg-path', '/var/tmp/tmpskzrq1n8']
+[2024-09-13T08:55:02.099+0000] {standard_task_runner.py:105} INFO - Job 9: Subtask download_launches
+[2024-09-13T08:55:02.128+0000] {task_command.py:467} INFO - Running <TaskInstance: download_rocket_launch_dag.download_launches manual__2024-09-13T08:54:59.224273+00:00 [running]> on host a580666a0efa
+[2024-09-13T08:55:02.177+0000] {taskinstance.py:3131} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='download_rocket_launch_dag' AIRFLOW_CTX_TASK_ID='download_launches' AIRFLOW_CTX_EXECUTION_DATE='2024-09-13T08:54:59.224273+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-09-13T08:54:59.224273+00:00'
+[2024-09-13T08:55:02.179+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2024-09-13T08:55:02.179+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2024-09-13T08:55:02.179+0000] {logging_mixin.py:190} INFO - Current task name:download_launches state:running start_date:2024-09-13 08:55:02.079065+00:00
+[2024-09-13T08:55:02.180+0000] {logging_mixin.py:190} INFO - Dag name:download_rocket_launch_dag and current dag run status:running
+[2024-09-13T08:55:02.180+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-09-13T08:55:02.181+0000] {subprocess.py:63} INFO - Tmp dir root location: /var/tmp
+[2024-09-13T08:55:02.181+0000] {subprocess.py:75} INFO - Running command: ['/usr/bin/bash', '-c', "curl -o /tmp/launches.json -L 'https://ll.thespacedevs.com/2.0.0/launch/upcoming'"]
+[2024-09-13T08:55:02.188+0000] {subprocess.py:86} INFO - Output:
+[2024-09-13T08:55:02.192+0000] {subprocess.py:93} INFO -   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+[2024-09-13T08:55:02.193+0000] {subprocess.py:93} INFO -                                  Dload  Upload   Total   Spent    Left  Speed
+[2024-09-13T08:55:02.943+0000] {subprocess.py:93} INFO -   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+[2024-09-13T08:55:03.941+0000] {subprocess.py:93} INFO - Warning: Failed to open the file /tmp/launches.json: Permission denied
+[2024-09-13T08:55:03.942+0000] {subprocess.py:93} INFO -   4 27437    4  1360    0     0    777      0  0:00:35  0:00:01  0:00:34   777
+[2024-09-13T08:55:03.943+0000] {subprocess.py:93} INFO - curl: (23) Failure writing output to destination
+[2024-09-13T08:55:03.943+0000] {subprocess.py:97} INFO - Command exited with return code 23
+[2024-09-13T08:55:03.955+0000] {taskinstance.py:3310} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/bash.py", line 249, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 23.
+[2024-09-13T08:55:03.958+0000] {logging_mixin.py:190} INFO - Task instance in failure state
+[2024-09-13T08:55:03.959+0000] {logging_mixin.py:190} INFO - Task start:2024-09-13 08:55:02.079065+00:00 end:2024-09-13 08:55:03.958403+00:00 duration:1.879338
+[2024-09-13T08:55:03.959+0000] {logging_mixin.py:190} INFO - Task:<Task(BashOperator): download_launches> dag:<DAG: download_rocket_launch_dag> dagrun:<DagRun download_rocket_launch_dag @ 2024-09-13 08:54:59.224273+00:00: manual__2024-09-13T08:54:59.224273+00:00, state:running, queued_at: 2024-09-13 08:54:59.238389+00:00. externally triggered: True>
+[2024-09-13T08:55:03.960+0000] {logging_mixin.py:190} INFO - Failure caused by Bash command failed. The command returned a non-zero exit code 23.
+[2024-09-13T08:55:03.960+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=download_rocket_launch_dag, task_id=download_launches, run_id=manual__2024-09-13T08:54:59.224273+00:00, execution_date=20240913T085459, start_date=20240913T085502, end_date=20240913T085503
+[2024-09-13T08:55:03.968+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-09-13T08:55:03.968+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 9 for task download_launches (Bash command failed. The command returned a non-zero exit code 23.; 87)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 115, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3004, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3158, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3182, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 406, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/bash.py", line 249, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 23.
+[2024-09-13T08:55:04.000+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-09-13T08:55:04.018+0000] {taskinstance.py:3900} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-09-13T08:55:04.022+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
